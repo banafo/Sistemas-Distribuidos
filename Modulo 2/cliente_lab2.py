@@ -11,7 +11,7 @@ sock.connect((HOST, PORTA))
 print('Digite "pare" se deseja encerra ou pode continua com a sua mensagem.\n')
 
 while True:
-	msg_to_server = input('Digite o nome do arquivo.txt para servidor: ')
+	msg_to_server = input('Digite o nome do arquivo para servidor: ')
 	if msg_to_server == 'pare':break 	#end program
 	else:
 		# envia uma mensagem para o par conectado
