@@ -3,7 +3,7 @@ import rpyc #modulo que oferece suporte a abstracao de RPC
 
 # endereco do servidor d echo
 SERVIDOR = 'localhost'
-PORTA = 10037
+PORTA = 10039
 node = 2
 neighbours = [0,3]
 
