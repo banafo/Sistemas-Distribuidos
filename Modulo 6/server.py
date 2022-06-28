@@ -9,7 +9,7 @@ from threading import Thread, Lock
 from random import randint
 
 # porta de escuta do servidor de echo
-PORTA = 10037
+PORTA = 10039
 lock = Lock()
 #graph1 = {}
 di = {}
@@ -67,20 +67,23 @@ class Echo(rpyc.Service):
 					#print(i)
 					lista.append(int(parts[i]))
 					#print(lista)
-				di[int(parts[0])] = lista
+				di[int(parts[0])] = lista   #criar dicionario aparte do arquvo
 				lista = []
 		ret = exposed_dfs(di, msg)
-		check = ret[1:]
-		maior_id  = check[0]
-		for i in check:
-			if node_id[i] > maior_id:
-				maior_id = node_id[i]
-				results = ['sequencia '+str(ret),'node '+str(i) ,'id '+str(maior_id)] #retorna a sequencia do grafo,o nó com maior id
+		if len(ret) > 1: 
+			check = ret[1:]
+			maior_id  = check[0]
+			for i in check:
+				if node_id[i] > maior_id:
+					maior_id = node_id[i]
+					results = ['sequencia '+str(ret),'node '+str(i) ,'id '+str(maior_id)] #retorna a sequencia do grafo,o nó com maior id
+		else:
+			results = ['sequencia '+str(ret),'node '+str(ret[0]) ,'id '+str(node_id[ret[0]])]
 
 		print(di)
 		return results
 
-	# faz registro de todos os nos que connecta com servidor
+	# faz registro de todos os nós que connecta com servidor
 	def exposed_register(self, node, neighbour):
 		#lock.acquire()
 		node_id[node] = randint(5,100)
